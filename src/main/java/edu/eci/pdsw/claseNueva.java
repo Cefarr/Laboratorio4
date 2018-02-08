@@ -41,7 +41,7 @@ public class claseNueva extends HttpServlet{
             Optional <Integer> optName = Optional.of(Integer.parseInt(req.getParameter("Iden")));
             Integer name = optName.get();
             clien=base.getClientById(name);
-            String HTML=
+            String HTML="<!DOCTYPE html>"+
                   "<html>"+
                 "<head><title>Ejemplo de tabla sencilla</title></head>"+
                 "<body>"+
@@ -74,8 +74,8 @@ public class claseNueva extends HttpServlet{
                    
 
 
-            responseWriter.write("OK"+name+"!");
-            responseWriter.write("Correo"+clien.getAddress()+"!");
+            //responseWriter.write("OK"+name+"!");
+            //responseWriter.write("Correo"+clien.getAddress()+"!");
             responseWriter.write(HTML);
             responseWriter.flush();
             
