@@ -38,27 +38,21 @@ public class claseNueva extends HttpServlet{
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         base=DataSourceStub.getInstance();           
         Writer responseWriter=resp.getWriter();
-        System.out.println("llego");
         Optional <Integer> optName = Optional.of(Integer.parseInt(req.getParameter("Iden")));                    
         Integer name = optName.get();
         try {
 
             clien=base.getClientById(name);
-            System.out.println("mirar el usuario"+clien.getName());
             if(clien.equals(null)){
                 responseWriter.write("Usuario no encontrado"+clien.getSallary());
-                System.out.println("321321312ver"+clien.equals(req));            
             
             }else{
-
-
-            System.out.println("llego3");
             String HTML="<!DOCTYPE html>"+
                     
                     "<html>"+
-                    "<head><title>Ejemplo de tabla sencilla</title></head>"+
+                    "<head><title>Ejemplo de datos del usuario</title></head>"+
                     "<body>"+
-                    "<h1>Listado de cursos</h1>"+
+                    "<h1>Listado de informacion del usuario</h1>"+
                     "<table>"+
                     "<tr>"+
                     "<td><strong>Nombre</strong></td>"+
@@ -83,11 +77,49 @@ public class claseNueva extends HttpServlet{
             resp.setStatus(2);            
             Logger.getLogger(claseNueva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        //responseWriter.write("OK"+name1+"!");
-        //responseWriter.flush();
+
     }
     
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        base=DataSourceStub.getInstance();           
+        Writer responseWriter=resp.getWriter();
+        Optional <Integer> optName = Optional.of(Integer.parseInt(req.getParameter("Iden")));                    
+        Integer name = optName.get();
+        try {
+            clien=base.getClientById(name);
+            if(clien.equals(null)){
+                responseWriter.write("Usuario no encontrado"+clien.getSallary());
+            }else{
+            String HTML="<!DOCTYPE html>"+
+                    
+                    "<html>"+
+                    "<head><title>Ejemplo de tabla sencilla</title></head>"+
+                    "<body>"+
+                    "<h1>Listado de cursos</h1>"+
+                    "<table>"+
+                    "<tr>"+
+                    "<td><strong>Nombre</strong></td>"+
+                    "<td><strong>Correo Electronico</strong></td>"+
+                    "<td><strong>Dirrecion</strong></td>"+
+                    "<td><strong>Salario</strong></td>"+
+                    "</tr>"+
+                    "<tr>"+
+                    "<td>"+clien.getName()+"</td>"+
+                    "<td>"+clien.getEmail()+"</td>"+
+                    "<td>"+clien.getAddress()+"</td>"+
+                    "<td>"+clien.getSallary()+"</td>"+
+                    "</tr>"+
+                    "</table>"+
+                    "</body>"+
+                    "</html>";
+                    responseWriter.write(HTML);
+                    responseWriter.flush();                
+            }
+        } catch (ClientNotFoundException ex) {
+            resp.setStatus(2);            
+            Logger.getLogger(claseNueva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
  
-    
 }

@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["Iden"].value;
+    if (x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+}
+</script>
+</head>
+<body>
+<form name="myForm" action="/claseNueva" onsubmit="return validateForm()" method="post">
+  Numero:<br>
+  <input type="number" name="Iden" value="123">
+
+  <br><br>
+  <input type="submit" value="Consultar" > 
+</form> 
+
+<p>Ingrese un numero para encontrar al cliente que busca.</p>
+
+</body>
 </html>
+
